@@ -1,10 +1,12 @@
 html {
+	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
+	-webkit-box-sizing: inherit;
 	box-sizing: inherit;
 }
 
@@ -23,9 +25,18 @@ body {
 }
 
 .container {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
 	flex-direction: column;
 
 }
@@ -41,19 +52,27 @@ h1 {
 
 .deck {
 	width: 660px;
-	min-height: 680px;
+	min-height: 660px;
 	background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
 	padding: 32px;
 	border-radius: 10px;
-	box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+	-webkit-box-shadow: 12px 15px 20px 0 #2e3d4980;
+	box-shadow: 12px 15px 20px 0 #2e3d4980;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-ms-flex-wrap: wrap;
 	flex-wrap: wrap;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
 	margin: 0 0 3em;
 }
 
-.deck .card {
+.card {
 	height: 125px;
 	width: 125px;
 	background: #2e3d49;
@@ -61,13 +80,32 @@ h1 {
 	color: #ffffff;
 	border-radius: 8px;
 	cursor: pointer;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
 	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
 	align-items: center;
-	box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+	-webkit-box-shadow: 5px 2px 20px 0 #2e3d4980;
+	box-shadow: 5px 2px 20px 0 #2e3d4980;
+}
+
+.easy-card {
+	height: 125px;
+	width: 125px;
+}
+
+.hard-card {
+	height: 86px;
+	width: 86px;
+	display: none;
 }
 
 .deck .card.open {
+	-webkit-transform: rotateY(0deg);
 	transform: rotateY(0deg);
 	background: #02b3e4;
 	cursor: default;
@@ -118,22 +156,81 @@ h1 {
 }
 
 /*
- * Modal
+ * Welcome Menu
  */
 
-.modal {
+.welcome-menu {
 	background-color: #fff;
 	left: 50%;
 	top: 50%;
+	text-align: center;
+	padding: 10px 0 30px 0; 
 	position: absolute;
 	-webkit-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	width: 700px;
-	height: 300px;
 	border: 1px solid #000;
 }
 
-.content {
+button {
+	outline: 0;
+}
+
+.difficulty {
+	margin: 30px 0 0 0;
+}
+
+.difficulty h3 {
+	margin: 0 0 10px 0;
+}
+
+.easy-mode,
+.hard-mode {
+	color: #fff;
+	text-decoration: none;
+	padding: 15px 50px;
+	border-style: none;
+	display: inline-block;
+	border-radius: 10rem;
+	position: relative;
+	font-size: 18px;
+	cursor: pointer;
+	margin: 0 15px;
+	font-weight: 700;
+}
+
+.easy-mode {
+	background-color: #6767c0;
+	transition: background-color 0.5s ease;
+}
+
+.easy-mode:hover {
+	background-color: #2323bd;
+}
+
+.hard-mode {
+	background-color: #d35e5e;
+	transition: background-color 0.5s ease;
+}
+
+.hard-mode:hover {
+	background-color: #da1b1b;
+}
+
+/* Results Modal */
+
+.result-modal {
+	left: 50%;
+	top: 50%;
+	border: none;
+	position: absolute;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	width: 700px;
+	border: 1px solid #000;
+}
+
+.result-content {
 	padding: 30px 0;
 	text-align: center;
 }
@@ -141,10 +238,10 @@ h1 {
 .reset {
 	width: 150px;
 	height: 50px;
+	margin: 0 0 20px 0;
 	font-size: 17px;
 	background-color: #02b3e4;
 	color: #fff;
-	border: none;
 	border-radius: 5px;
 	cursor: pointer;
 }

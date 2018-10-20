@@ -1,70 +1,98 @@
-const cards = document.getElementsByClassName("card");
-const cardsArray = Array.prototype.slice.call(cards); // Converts card elements to an array.
+const modeButtons = document.getElementsByClassName("mode-button");
+const card = document.getElementsByClassName("card");
+const cardsArray = Array.prototype.slice.call(card); // Converts card elements to an array.
 const moves = document.querySelector(".moves");
 const minutes = document.querySelector(".minutes");
 const seconds = document.querySelector(".seconds");
 let turn = []; // Stores turns in each pair of attempts.
 let movesCounter = 0;
 let points = 0;
+let mode;
 let timer; // Serves as reference for time interval.
 let isPlaying = false; // This boolean controls timer on or off.
 
 init();
 
+
 function init() {
-	const random = shuffle(cardsArray); // Stores shuffle function with array of cards as argument.
+	const random = shuffle(cardsArray); // Stores shuffle function with array of card as argument.
 	const deck = document.querySelector(".deck");
 	const starItem = "<li><i class='fa fa-star'></i></li>";
 
 	/* Resets all counters and DOM elements. */
 	document.querySelector(".stars").innerHTML = starItem + starItem + starItem;
 	document.querySelector(".container").style.display = "flex";
-	document.querySelector(".modal").style.display = "none";
-	document.querySelector(".minutes").textContent = "0";
-	document.querySelector(".seconds").textContent = "00";
+	document.querySelector(".welcome-menu").style.display = "block";
+	document.querySelector(".result-modal").style.display = "none";
+	minutes.textContent = "0";
+	seconds.textContent = "00";
 	movesCounter = 0;
 	moves.textContent = movesCounter;
 	points = 0;
 	turn = [];
 	isPlaying = false;
 
-	/* Removes card styling and hides them face down. */
-	for (const card of random) {
-		card.classList.remove("open", "show", "match");
-	}
 
-	/* Loops through cards array and appends each card in random order. */
-	for (const card of random) {
+
+	/* Removes card styling and hides them face down. */
+	cardsArray.forEach(card => {
+		card.classList.remove("open", "show", "match");
+	});
+
+	/* Loops through card array and appends each card in random order. */
+	random.forEach(card => {
 		deck.append(card);
-	}
+	});
 
 	clearInterval(timer); // Stops timer.
 	setEventListener(); // Initiates event listeners.
 }
 
 function setEventListener() {
-	document.querySelector(".restart").addEventListener("click", init); // Sets event listener to restart icon.
-	document.querySelector(".reset").addEventListener("click", init); // Sets event listener to results button.
+
+	for (let i = 0; i < modeButtons.length; i++) {
+		modeButtons[i].addEventListener("click", setMode);
+	};
 
 	/* Loops through all card elements and attaches each with event listeners that reveal a clicked card. */
-	for (const card of cards) {
+	cardsArray.forEach(card => {
 		card.addEventListener("click", cardEventListener);
-	}
-
+	});
 	/* Loops through all card elements and attaches each with event listeners to start the 'startTimer' function. */
-	for (const timer of cards) {
-		timer.addEventListener("click", startTimer);
+	cardsArray.forEach(card => {
+		card.addEventListener("click", startTimer);
+	});
+
+	document.querySelector(".restart").addEventListener("click", init); // Sets event listener to restart icon.
+	document.querySelector(".reset").addEventListener("click", init); // Sets event listener to results button.
+}
+
+function setMode() {
+	const choice = this.textContent;
+	const welcome = document.querySelector(".welcome-menu");
+
+	welcome.style.display = "none";
+	if (choice === "Easy") {
+		mode = "easy";
+
+	} else if (choice === "Hard") {
+		mode = "hard";
+		cardsArray.forEach(card => {
+			card.classList.add("hard-card");
+			card.classList.remove("easy-card");
+			card.style.display = "flex";
+		})
 	}
 }
 
 function cardEventListener(e) {
 	/* Once timer is counting, event listeners for starting the timer is removed. */
 	if (isPlaying) {
-		for (const timer of cards) {
-			timer.removeEventListener("click", startTimer);
-		}
+		cardsArray.forEach(card => {
+			card.removeEventListener("click", startTimer);
+		});
 	}
-
+	console.log(points);
 	/* Click adds styling to card and shows symbol. */
 	if (e.target.classList.contains("show")) {
 		return "";
@@ -74,38 +102,38 @@ function cardEventListener(e) {
 	}
 
 	if (turn.length === 2) {
-		/* When a pair of cards are flipped, move counter increments up. */
+		/* When a pair of card are flipped, move counter increments up. */
 		movesCounter++;
 		moves.textContent = movesCounter;
 		starsCount(movesCounter); // Moves counter is passed into 'starsCount' function as an argument.
 
 		if (turn[0][0].classList.value !== turn[1][0].classList.value) {
-			/* If pair of cards do NOT match, the 'wrong' style is applied to both. */
+			/* If pair of card do NOT match, the 'wrong' style is applied to both. */
 			turn[0][0].parentElement.classList.add("wrong");
 			turn[1][0].parentElement.classList.add("wrong");
-			/* Prevents other cards from being clicked while mismatched cards are showing. */
-			for (const card of cards) {
+			/* Prevents other card from being clicked while mismatched card are showing. */
+			cardsArray.forEach(card => {
 				card.removeEventListener("click", cardEventListener)
-			}
+			});
 
-			/* 'Wrong' styling is shown briefly before non-matching cards are hidden again. */
+			/* 'Wrong' styling is shown briefly before non-matching card are hidden again. */
 			setTimeout(function () {
 				turn[0][0].parentElement.classList.remove("open", "show", "wrong");
 				turn[1][0].parentElement.classList.remove("open", "show", "wrong");
 
-				turn = []; // 'Turn' array is emptied when a pair of cards are revealed.
-				/* When mismatched cards are hidden again, event listeners are added again. */
-				for (const card of cards) {
+				turn = []; // 'Turn' array is emptied when a pair of card are revealed.
+				/* When mismatched card are hidden again, event listeners are added again. */
+				cardsArray.forEach(card => {
 					card.addEventListener("click", cardEventListener);
-				}
+				})
 			}, 1000);
 
 		} else {
-			/* If pair of cards DO match, the 'match' style is applied to both. */
+			/* If pair of card DO match, the 'match' style is applied to both. */
 			turn[0][0].parentElement.classList.add("match");
 			turn[1][0].parentElement.classList.add("match");
 			points++; // If a match is made, points increment up.
-			turn = []; // 'Turn' array is emptied when a pair of cards are revealed.
+			turn = []; // 'Turn' array is emptied when a pair of card are revealed.
 		}
 	}
 	/* Once all matches are found, the 'results' function is immediately called */
@@ -147,7 +175,6 @@ function startTimer() {
 			minutes.textContent = mins;
 		}
 	}, 1000);
-
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -172,7 +199,7 @@ function result() {
 	const starsCount = document.querySelectorAll(".stars li");
 
 	clearInterval(timer); // When game is over, the timer stops.
-	document.querySelector(".container").style.display = "none"; // The cards display is removed.
-	document.querySelector(".modal").style.display = "inline-block"; // Results modal is displayed.
+	document.querySelector(".container").style.display = "none"; // The card display is removed.
+	document.querySelector(".result-modal").style.display = "inline-block"; // Results modal is displayed.
 	showResult.textContent = `Your time was ${time.textContent}, in ${moves.textContent} moves and with ${starsCount.length} star${starsCount.length !== 1 ? "s" : ""}!`; // Shows the completion time, number of stars and moves attempts.
 }

@@ -5,6 +5,7 @@
 	<meta charset="utf-8">
 	<title>Matching Game</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="description" content="">
 	<link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 	<link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
@@ -61,6 +62,9 @@
 				<i class="fa fa-diamond"></i>
 			</li>
 			<li class="card">
+				<i class="fa fa-cube"></i>
+			</li>
+			<li class="card">
 				<i class="fa fa-bomb"></i>
 			</li>
 			<li class="card">
@@ -78,19 +82,87 @@
 			<li class="card">
 				<i class="fa fa-paper-plane-o"></i>
 			</li>
-			<li class="card">
-				<i class="fa fa-cube"></i>
+			<li class="card hard-card">
+				<i class="fa fa-bell"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-bell"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-hashtag"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-hashtag"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-heart"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-heart"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-phone"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-phone"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-question"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-question"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-star"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-star"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-wifi"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-wifi"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-lock"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-lock"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-envelope"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-envelope"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-cloud"></i>
+			</li>
+			<li class="card hard-card">
+				<i class="fa fa-cloud"></i>
 			</li>
 		</ul>
 	</div>
-	<div class="modal">
-		<div class="content">
+
+	<div class="welcome-menu">
+		<div class="welcome-content">
+			<h1>Welcome to the Memory Game!</h1>
+			<div class="difficulty">
+				<h3>Select your difficulty level</h3>
+				<button class="mode-button easy-mode">Easy</button>
+				<button class="mode-button hard-mode">Hard</button>
+			</div>
+		</div>
+	</div>
+	<div class="result-modal">
+		<div class="result-content">
 			<h1 class="result-heading">You Won!!!</h1>
 			<p class="result"></p>
 			<button type="button" class="reset">Play Again!</button>
 		</div>
 	</div>
-	<script src="./public/scripts/bundle.js"></script>
+	<script src="./src/index.js"></script>
 </body>
 
 </html>
