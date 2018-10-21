@@ -1,4 +1,3 @@
-const modeButtons = document.getElementsByClassName("mode-button");
 const card = document.getElementsByClassName("card");
 const cardsArray = Array.prototype.slice.call(card); // Converts card elements to an array.
 const moves = document.querySelector(".moves");
@@ -13,7 +12,6 @@ let isPlaying = false; // This boolean controls timer on or off.
 
 init();
 
-
 function init() {
 	const random = shuffle(cardsArray); // Stores shuffle function with array of card as argument.
 	const deck = document.querySelector(".deck");
@@ -21,9 +19,10 @@ function init() {
 
 	/* Resets all counters and DOM elements. */
 	document.querySelector(".stars").innerHTML = starItem + starItem + starItem;
-	document.querySelector(".container").style.display = "flex";
+	document.querySelector(".container").style.display = "none";
 	document.querySelector(".welcome-menu").style.display = "block";
 	document.querySelector(".result-modal").style.display = "none";
+
 	minutes.textContent = "0";
 	seconds.textContent = "00";
 	movesCounter = 0;
@@ -31,8 +30,6 @@ function init() {
 	points = 0;
 	turn = [];
 	isPlaying = false;
-
-
 
 	/* Removes card styling and hides them face down. */
 	cardsArray.forEach(card => {
@@ -49,6 +46,7 @@ function init() {
 }
 
 function setEventListener() {
+	const modeButtons = document.getElementsByClassName("mode-button");
 
 	for (let i = 0; i < modeButtons.length; i++) {
 		modeButtons[i].addEventListener("click", setMode);
@@ -71,17 +69,25 @@ function setMode() {
 	const choice = this.textContent;
 	const welcome = document.querySelector(".welcome-menu");
 
+	document.querySelector(".container").style.display = "flex";
 	welcome.style.display = "none";
+
 	if (choice === "Easy") {
 		mode = "easy";
-
+		cardsArray.forEach(card => {
+			if (card.classList.contains("hard-card")) {
+				card.style.display = "none";
+			}
+			card.style.width = "125px";
+			card.style.height = "125px";
+		});
 	} else if (choice === "Hard") {
 		mode = "hard";
 		cardsArray.forEach(card => {
-			card.classList.add("hard-card");
-			card.classList.remove("easy-card");
+			card.style.width = "86px";
+			card.style.height = "86px";
 			card.style.display = "flex";
-		})
+		});
 	}
 }
 
@@ -137,7 +143,9 @@ function cardEventListener(e) {
 		}
 	}
 	/* Once all matches are found, the 'results' function is immediately called */
-	if (points === 8) {
+	if (points === 8 && mode === "easy") {
+		result();
+	} else if (points === 18 && mode === "hard") {
 		result();
 	}
 }
@@ -146,11 +154,14 @@ function starsCount(counter) {
 	const stars = document.querySelector(".stars");
 	let firstItem = document.querySelector("li:first-child");
 	/* The 'movesCounter' is passed as an argument and into the switch statement to determine when a star is removed. */
-	switch (counter) {
-		case 14:
-		case 20:
-			stars.removeChild(firstItem);
+	if (mode === "easy") {
+		switch (counter) {
+			case 14:
+			case 20:
+				stars.removeChild(firstItem);
+		}
 	}
+
 }
 
 function startTimer() {

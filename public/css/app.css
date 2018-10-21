@@ -38,7 +38,7 @@ body {
 	-webkit-box-direction: normal;
 	-ms-flex-direction: column;
 	flex-direction: column;
-
+	margin: 50px 0 0 0;
 }
 
 h1 {
@@ -47,95 +47,21 @@ h1 {
 }
 
 /*
- * Styles for the deck of cards
- */
-
-.deck {
-	width: 660px;
-	min-height: 660px;
-	background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-	padding: 32px;
-	border-radius: 10px;
-	-webkit-box-shadow: 12px 15px 20px 0 #2e3d4980;
-	box-shadow: 12px 15px 20px 0 #2e3d4980;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-ms-flex-wrap: wrap;
-	flex-wrap: wrap;
-	-webkit-box-pack: justify;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	margin: 0 0 3em;
-}
-
-.card {
-	height: 125px;
-	width: 125px;
-	background: #2e3d49;
-	font-size: 0;
-	color: #ffffff;
-	border-radius: 8px;
-	cursor: pointer;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
-	justify-content: center;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	-webkit-box-shadow: 5px 2px 20px 0 #2e3d4980;
-	box-shadow: 5px 2px 20px 0 #2e3d4980;
-}
-
-.easy-card {
-	height: 125px;
-	width: 125px;
-}
-
-.hard-card {
-	height: 86px;
-	width: 86px;
-	display: none;
-}
-
-.deck .card.open {
-	-webkit-transform: rotateY(0deg);
-	transform: rotateY(0deg);
-	background: #02b3e4;
-	cursor: default;
-}
-
-.deck .card.wrong {
-	background: #ed4444;
-}
-
-.deck .card.show {
-	font-size: 33px;
-}
-
-.deck .card.match {
-	cursor: default;
-	background: #02ccba;
-	font-size: 33px;
-}
-
-/*
  * Styles for the Score Panel
  */
 
 .score-panel {
-	width: 500px;
+	width: 650px;
 	margin-bottom: 10px;
+	display: flex;
+	font-size: 24px;
+	justify-content: space-between;
 }
 
 .timer {
 	display: inline-block;
+	position: relative;
+	right: 70px;
 }
 
 .score-panel .stars {
@@ -151,7 +77,6 @@ h1 {
 }
 
 .score-panel .restart {
-	float: right;
 	cursor: pointer;
 }
 
@@ -216,6 +141,83 @@ button {
 .hard-mode:hover {
 	background-color: #da1b1b;
 }
+
+/*
+ * Styles for the deck of cards
+ */
+
+.deck {
+	width: 660px;
+	min-height: 660px;
+	background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+	padding: 32px;
+	border-radius: 10px;
+	-webkit-box-shadow: 12px 15px 20px 0 #2e3d4980;
+	box-shadow: 12px 15px 20px 0 #2e3d4980;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	margin: 0 0 3em;
+}
+
+.card {
+	height: 125px;
+	width: 125px;
+	background: #2e3d49;
+	font-size: 0;
+	color: #ffffff;
+	border-radius: 8px;
+	cursor: pointer;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	justify-content: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	-webkit-box-shadow: 5px 2px 20px 0 #2e3d4980;
+	box-shadow: 5px 2px 20px 0 #2e3d4980;
+}
+
+
+.hard-card {
+	height: 86px;
+	width: 86px;
+	display: none;
+}
+
+.deck .card.open {
+	-webkit-transform: rotateY(0deg);
+	transform: rotateY(0deg);
+	background: #02b3e4;
+	cursor: default;
+}
+
+.deck .card.wrong {
+	background: #ed4444;
+}
+
+.deck .card.show {
+	font-size: 33px;
+}
+
+.deck .card.match {
+	cursor: default;
+	background: #02ccba;
+	font-size: 33px;
+}
+
+
 
 /* Results Modal */
 
