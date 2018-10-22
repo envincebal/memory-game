@@ -95,7 +95,7 @@ h1 {
 	border: 1px solid #000;
 }
 
-.rules-list{
+.rules-list {
 	text-align: left;
 	margin: 0 0 0 100px;
 }
@@ -144,15 +144,16 @@ h1 {
 }
 
 .reset-button,
-.restart-button{
+.restart-button {
 	background-color: #48bb48;
 	transition: background-color 0.5s ease;
 }
 
 .reset-button:hover,
-.restart-button:hover{
+.restart-button:hover {
 	background-color: #108110;
 }
+
 /*
  * Styles for the deck of cards
  */
@@ -245,7 +246,7 @@ h1 {
 	text-align: center;
 }
 
-.result-heading{
+.result-heading {
 	font-weight: 700;
 }
 
