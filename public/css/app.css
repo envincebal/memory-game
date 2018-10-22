@@ -24,6 +24,10 @@ body {
 	font-family: 'Coda', cursive;
 }
 
+button {
+	outline: 0;
+}
+
 .container {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -38,7 +42,7 @@ body {
 	-webkit-box-direction: normal;
 	-ms-flex-direction: column;
 	flex-direction: column;
-	margin: 50px 0 0 0;
+	margin: 20px 0 0 0;
 }
 
 h1 {
@@ -52,16 +56,10 @@ h1 {
 
 .score-panel {
 	width: 650px;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 	display: flex;
 	font-size: 24px;
 	justify-content: space-between;
-}
-
-.timer {
-	display: inline-block;
-	position: relative;
-	right: 70px;
 }
 
 .score-panel .stars {
@@ -89,7 +87,7 @@ h1 {
 	left: 50%;
 	top: 50%;
 	text-align: center;
-	padding: 10px 0 30px 0; 
+	padding: 10px 0 30px 0;
 	position: absolute;
 	-webkit-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
@@ -97,8 +95,9 @@ h1 {
 	border: 1px solid #000;
 }
 
-button {
-	outline: 0;
+.rules-list{
+	text-align: left;
+	margin: 0 0 0 100px;
 }
 
 .difficulty {
@@ -110,7 +109,9 @@ button {
 }
 
 .easy-mode,
-.hard-mode {
+.hard-mode,
+.reset-button,
+.restart-button {
 	color: #fff;
 	text-decoration: none;
 	padding: 15px 50px;
@@ -142,6 +143,16 @@ button {
 	background-color: #da1b1b;
 }
 
+.reset-button,
+.restart-button{
+	background-color: #48bb48;
+	transition: background-color 0.5s ease;
+}
+
+.reset-button:hover,
+.restart-button:hover{
+	background-color: #108110;
+}
 /*
  * Styles for the deck of cards
  */
@@ -165,7 +176,7 @@ button {
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
-	margin: 0 0 3em;
+	margin: 0 0 20px 0;
 }
 
 .card {
@@ -188,7 +199,6 @@ button {
 	-webkit-box-shadow: 5px 2px 20px 0 #2e3d4980;
 	box-shadow: 5px 2px 20px 0 #2e3d4980;
 }
-
 
 .hard-card {
 	height: 86px;
@@ -217,8 +227,6 @@ button {
 	font-size: 33px;
 }
 
-
-
 /* Results Modal */
 
 .result-modal {
@@ -235,6 +243,10 @@ button {
 .result-content {
 	padding: 30px 0;
 	text-align: center;
+}
+
+.result-heading{
+	font-weight: 700;
 }
 
 .reset {

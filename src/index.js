@@ -3,11 +3,11 @@ const cardsArray = Array.prototype.slice.call(card); // Converts card elements t
 const moves = document.querySelector(".moves");
 const minutes = document.querySelector(".minutes");
 const seconds = document.querySelector(".seconds");
+let timer; // Serves as reference for time interval.
+let mode; // Serves as reference for easy or hard mode.
 let turn = []; // Stores turns in each pair of attempts.
 let movesCounter = 0;
 let points = 0;
-let mode;
-let timer; // Serves as reference for time interval.
 let isPlaying = false; // This boolean controls timer on or off.
 
 init();
@@ -23,6 +23,7 @@ function init() {
 	document.querySelector(".welcome-menu").style.display = "block";
 	document.querySelector(".result-modal").style.display = "none";
 
+	// Resets all initial counters and stats.
 	minutes.textContent = "0";
 	seconds.textContent = "00";
 	movesCounter = 0;
@@ -48,10 +49,10 @@ function init() {
 function setEventListener() {
 	const modeButtons = document.getElementsByClassName("mode-button");
 
+	/* Attaches mode buttons to determine easy or hard difficulty. */
 	for (let i = 0; i < modeButtons.length; i++) {
 		modeButtons[i].addEventListener("click", setMode);
 	};
-
 	/* Loops through all card elements and attaches each with event listeners that reveal a clicked card. */
 	cardsArray.forEach(card => {
 		card.addEventListener("click", cardEventListener);
@@ -61,8 +62,8 @@ function setEventListener() {
 		card.addEventListener("click", startTimer);
 	});
 
-	document.querySelector(".restart").addEventListener("click", init); // Sets event listener to restart icon.
-	document.querySelector(".reset").addEventListener("click", init); // Sets event listener to results button.
+	document.querySelector(".restart-button").addEventListener("click", init); // Sets event listener to restart icon.
+	document.querySelector(".reset-button").addEventListener("click", init); // Sets event listener to results button.
 }
 
 function setMode() {
@@ -72,6 +73,7 @@ function setMode() {
 	document.querySelector(".container").style.display = "flex";
 	welcome.style.display = "none";
 
+	// Checks whether Easy or Hard mode was chosen and renders deck of cards accordingly.
 	if (choice === "Easy") {
 		mode = "easy";
 		cardsArray.forEach(card => {
@@ -98,7 +100,6 @@ function cardEventListener(e) {
 			card.removeEventListener("click", startTimer);
 		});
 	}
-	console.log(points);
 	/* Click adds styling to card and shows symbol. */
 	if (e.target.classList.contains("show")) {
 		return "";
@@ -106,7 +107,7 @@ function cardEventListener(e) {
 		e.target.classList.add("open", "show");
 		turn.push(e.target.children); // Uncovered card is inserted to 'turn' array.
 	}
-
+	console.log(mode);
 	if (turn.length === 2) {
 		/* When a pair of card are flipped, move counter increments up. */
 		movesCounter++;
@@ -144,9 +145,9 @@ function cardEventListener(e) {
 	}
 	/* Once all matches are found, the 'results' function is immediately called */
 	if (points === 8 && mode === "easy") {
-		result();
+		result("won");
 	} else if (points === 18 && mode === "hard") {
-		result();
+		result("won");
 	}
 }
 
@@ -156,34 +157,54 @@ function starsCount(counter) {
 	/* The 'movesCounter' is passed as an argument and into the switch statement to determine when a star is removed. */
 	if (mode === "easy") {
 		switch (counter) {
-			case 14:
+			case 12:
+			case 18:
 			case 20:
+				stars.removeChild(firstItem);
+		}
+	} else {
+		switch (counter) {
+			case 30:
+			case 40:
+			case 50:
 				stars.removeChild(firstItem);
 		}
 	}
 
+	// If stars runs out, "stars" is passed into results function to indicate loss.
+	if (mode === "easy" && !stars.childElementCount && points < 8) {
+		result("stars");
+	} else if (mode === "hard" && !stars.childElementCount && points < 18) {
+		result("stars");
+	}
 }
 
 function startTimer() {
+	let easyTime = 2; // "Easy" mode gives player 2 minutes.
+	let hardTime = 4; // "Hard" mode gives player 4 minutes.
 	let secs = 0; // Seconds counter.
-	let mins = 0; // Minutes counter.
+	let mins = mode === "easy" ? easyTime : hardTime; // Minutes counter.
 
 	isPlaying = true;
 
-	/* Sets the game time counter */
+	/* Sets the game time countdown */
 	timer = setInterval(function () {
-
-		if (secs >= 59) {
-			secs = 0;
-			seconds.textContent = "0" + secs;
+		if (secs <= 0) {
+			secs = 59;
+			seconds.textContent = secs;
 		} else {
-			secs++;
+			secs--;
 			seconds.textContent = (secs < 10) ? "0" + secs : secs;
 		}
 
-		if (secs === 0) {
-			mins++;
+		if (secs === 59) {
+			mins--;
 			minutes.textContent = mins;
+		}
+
+		// If time runs out, "time" is passed into results function to indicate loss.
+		if (mins === 0 && secs === 0) {
+			result("time");
 		}
 	}, 1000);
 }
@@ -204,13 +225,22 @@ function shuffle(array) {
 	return array;
 }
 
-function result() {
+function result(condition) {
+	const resultHeading = document.querySelector(".result-heading");
 	const showResult = document.querySelector(".result");
-	const time = document.querySelector(".timer");
-	const starsCount = document.querySelectorAll(".stars li");
+	const remainingTime = document.querySelector(".timer");
+	const remainingStars = document.querySelectorAll(".stars li");
 
 	clearInterval(timer); // When game is over, the timer stops.
 	document.querySelector(".container").style.display = "none"; // The card display is removed.
 	document.querySelector(".result-modal").style.display = "inline-block"; // Results modal is displayed.
-	showResult.textContent = `Your time was ${time.textContent}, in ${moves.textContent} moves and with ${starsCount.length} star${starsCount.length !== 1 ? "s" : ""}!`; // Shows the completion time, number of stars and moves attempts.
+
+	// Shows the completion time, number of stars and moves attempts.
+	if (condition === "won") {
+		resultHeading.textContent = `You Won!!!`;
+		showResult.textContent = `Your time was ${remainingTime.textContent}, in ${moves.textContent} moves and with ${remainingStars.length} star${remainingStars.length !== 1 ? "s" : ""}!`;
+	} else if (condition === "time" || condition === "stars") {
+		resultHeading.textContent = `Sorry, you ran out of ${condition}.`;
+		showResult.textContent = `Please try again.`;
+	}
 }

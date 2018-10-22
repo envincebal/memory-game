@@ -15,7 +15,6 @@
 <body>
 
 	<div class="container">
-
 		<section class="score-panel">
 			<div>
 				<span class="moves">0</span> Moves
@@ -27,9 +26,6 @@
 			</div>
 			<div class="timer">
 				<span class="minutes">0</span>:<span class="seconds">00</span>
-			</div>
-			<div class="restart">
-				<i class="fa fa-repeat"></i>
 			</div>
 		</section>
 
@@ -143,13 +139,22 @@
 				<i class="fa fa-cloud"></i>
 			</li>
 		</ul>
+		<div class="restart">
+			<button type="button" class="restart-button">Reset</button>
+		</div>
 	</div>
 
 	<div class="welcome-menu">
 		<div class="welcome-content">
 			<h1>Welcome to the Memory Game!</h1>
+			<h3>Rules</h3>
+			<ol class="rules-list">
+				<li>Choose a difficulty mode.</li>
+				<li>Easy mode is a 4x4 deck. Hard mode is a 6x6 deck.</li>
+				<li>Find all matching pairs before stars or time runs out.</li>
+			</ol>
 			<div class="difficulty">
-				<h3>Select your difficulty level</h3>
+				<h3>Select your difficulty mode</h3>
 				<button class="mode-button easy-mode">Easy</button>
 				<button class="mode-button hard-mode">Hard</button>
 			</div>
@@ -157,9 +162,9 @@
 	</div>
 	<div class="result-modal">
 		<div class="result-content">
-			<h1 class="result-heading">You Won!!!</h1>
+			<h1 class="result-heading"></h1>
 			<p class="result"></p>
-			<button type="button" class="reset">Play Again!</button>
+			<button type="button" class="reset-button">Play Again!</button>
 		</div>
 	</div>
 	<script src="./src/index.js"></script>
