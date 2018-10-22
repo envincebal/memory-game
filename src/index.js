@@ -107,7 +107,7 @@ function cardEventListener(e) {
 		e.target.classList.add("open", "show");
 		turn.push(e.target.children); // Uncovered card is inserted to 'turn' array.
 	}
-	console.log(mode);
+
 	if (turn.length === 2) {
 		/* When a pair of card are flipped, move counter increments up. */
 		movesCounter++;
