@@ -47,12 +47,7 @@ function init() {
 }
 
 function setEventListener() {
-	const modeButtons = document.getElementsByClassName("mode-button");
 
-	/* Attaches mode buttons to determine easy or hard difficulty. */
-	for (let i = 0; i < modeButtons.length; i++) {
-		modeButtons[i].addEventListener("click", setMode);
-	};
 	/* Loops through all card elements and attaches each with event listeners that reveal a clicked card. */
 	cardsArray.forEach(card => {
 		card.addEventListener("click", cardEventListener);
@@ -62,8 +57,15 @@ function setEventListener() {
 		card.addEventListener("click", startTimer);
 	});
 
-	document.querySelector(".restart-button").addEventListener("click", init); // Sets event listener to restart icon.
-	document.querySelector(".reset-button").addEventListener("click", init); // Sets event listener to results button.
+	// Sets event listener to easy button.
+	document.querySelector(".easy-button").addEventListener("click", setMode);
+	// Sets event listener to hard button.
+	document.querySelector(".hard-button").addEventListener("click", setMode);
+
+	// Sets event listener to restart icon.
+	document.querySelector(".restart-button").addEventListener("click", init);
+	// Sets event listener to results button.
+	document.querySelector(".reset-button").addEventListener("click", init);
 }
 
 function setMode() {
