@@ -58,9 +58,9 @@ function setEventListener() {
 	});
 
 	// Sets event listener to easy button.
-	document.querySelector(".easy-button").addEventListener("click", setMode);
+	document.querySelector(".easy-mode").addEventListener("click", setMode);
 	// Sets event listener to hard button.
-	document.querySelector(".hard-button").addEventListener("click", setMode);
+	document.querySelector(".hard-mode").addEventListener("click", setMode);
 
 	// Sets event listener to restart icon.
 	document.querySelector(".restart-button").addEventListener("click", init);
