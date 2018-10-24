@@ -74,7 +74,7 @@ function setMode() {
 	let easyTime = 2; // "Easy" mode gives player 2 minutes.
 	let hardTime = 4; // "Hard" mode gives player 4 minutes.
 
-	minutes.textContent = choice === "Easy" ? easyTime : hardTime;;
+	minutes.textContent = choice === "Easy" ? easyTime : hardTime;
 
 	document.querySelector(".container").style.display = "flex";
 	welcome.style.display = "none";
