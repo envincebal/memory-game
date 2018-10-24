@@ -114,6 +114,13 @@ function cardEventListener(e) {
 		turn.push(e.target.children); // Uncovered card is inserted to 'turn' array.
 	}
 
+	/* Removes event listeners on revealed cards. */
+	cardsArray.forEach(card => {
+		if (card.classList.contains("open")) {
+			card.removeEventListener("click", cardEventListener);
+		}
+	});
+
 	if (turn.length === 2) {
 		/* When a pair of card are flipped, move counter increments up. */
 		movesCounter++;
@@ -135,9 +142,13 @@ function cardEventListener(e) {
 				turn[1][0].parentElement.classList.remove("open", "show", "wrong");
 
 				turn = []; // 'Turn' array is emptied when a pair of card are revealed.
-				/* When mismatched card are hidden again, event listeners are added again. */
+
+				/* When mismatched card are hidden again, event listeners are added again on cards not matched or open. */
 				cardsArray.forEach(card => {
-					card.addEventListener("click", cardEventListener);
+					if (!card.classList.contains("match")) {
+						card.addEventListener("click", cardEventListener);
+					}
+
 				})
 			}, 1000);
 
