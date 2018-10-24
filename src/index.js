@@ -24,7 +24,7 @@ function init() {
 	document.querySelector(".result-modal").style.display = "none";
 
 	// Resets all initial counters and stats.
-	minutes.textContent = "0";
+
 	seconds.textContent = "00";
 	movesCounter = 0;
 	moves.textContent = movesCounter;
@@ -71,6 +71,10 @@ function setEventListener() {
 function setMode() {
 	const choice = this.textContent;
 	const welcome = document.querySelector(".welcome-menu");
+	let easyTime = 2; // "Easy" mode gives player 2 minutes.
+	let hardTime = 4; // "Hard" mode gives player 4 minutes.
+
+	minutes.textContent = choice === "Easy" ? easyTime : hardTime;;
 
 	document.querySelector(".container").style.display = "flex";
 	welcome.style.display = "none";
@@ -182,10 +186,8 @@ function starsCount(counter) {
 }
 
 function startTimer() {
-	let easyTime = 2; // "Easy" mode gives player 2 minutes.
-	let hardTime = 4; // "Hard" mode gives player 4 minutes.
+	let mins = minutes.textContent; // Minutes counter.
 	let secs = 0; // Seconds counter.
-	let mins = mode === "easy" ? easyTime : hardTime; // Minutes counter.
 
 	isPlaying = true;
 
@@ -213,8 +215,9 @@ function startTimer() {
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-	var currentIndex = array.length,
-		temporaryValue, randomIndex;
+	let currentIndex = array.length;
+	let temporaryValue;
+	let randomIndex;
 
 	while (currentIndex !== 0) {
 		randomIndex = Math.floor(Math.random() * currentIndex);
