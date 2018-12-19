@@ -57,8 +57,12 @@ h1 {
 .score-panel {
 	width: 650px;
 	margin-bottom: 5px;
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
 	font-size: 24px;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
 	justify-content: space-between;
 }
 
@@ -127,6 +131,7 @@ h1 {
 
 .easy-mode {
 	background-color: #6767c0;
+	-webkit-transition: background-color 0.5s ease;
 	transition: background-color 0.5s ease;
 }
 
@@ -136,6 +141,7 @@ h1 {
 
 .hard-mode {
 	background-color: #d35e5e;
+	-webkit-transition: background-color 0.5s ease;
 	transition: background-color 0.5s ease;
 }
 
@@ -146,6 +152,7 @@ h1 {
 .reset-button,
 .restart-button {
 	background-color: #48bb48;
+	-webkit-transition: background-color 0.5s ease;
 	transition: background-color 0.5s ease;
 }
 
@@ -164,8 +171,8 @@ h1 {
 	background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
 	padding: 32px;
 	border-radius: 10px;
-	-webkit-box-shadow: 12px 15px 20px 0 #2e3d4980;
-	box-shadow: 12px 15px 20px 0 #2e3d4980;
+	-webkit-box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.502);
+	box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.502);
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
@@ -197,8 +204,8 @@ h1 {
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
-	-webkit-box-shadow: 5px 2px 20px 0 #2e3d4980;
-	box-shadow: 5px 2px 20px 0 #2e3d4980;
+	-webkit-box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.502);
+	box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.502);
 }
 
 .hard-card {

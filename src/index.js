@@ -133,7 +133,7 @@ function cardEventListener(e) {
 			turn[1][0].parentElement.classList.add("wrong");
 			/* Prevents other card from being clicked while mismatched card are showing. */
 			cardsArray.forEach(card => {
-				card.removeEventListener("click", cardEventListener)
+				card.removeEventListener("click", cardEventListener);
 			});
 
 			/* 'Wrong' styling is shown briefly before non-matching card are hidden again. */
@@ -149,7 +149,7 @@ function cardEventListener(e) {
 						card.addEventListener("click", cardEventListener);
 					}
 
-				})
+				});
 			}, 1000);
 
 		} else {
